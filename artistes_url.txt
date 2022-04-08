@@ -1,0 +1,26 @@
+
+Client ID : e67bfd48396d49068012ce28816b7076
+
+----------------------------------------------------------------------------------------
+Miles Davis :
+<iframe style="border-radius:12px" 
+src="https://open.spotify.com/embed/artist/0kbYTNQb4Pb1rPbbaF0pT4?utm_source=generator" 
+width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; 
+fullscreen; picture-in-picture"></iframe>
+
+The Dave Brubeck Quartet :
+src="https://open.spotify.com/embed/artist/4iRZAbYvBqnxrbs6K25aJ7?utm_source=generator"
+
+Charlie Parker :
+src="https://open.spotify.com/embed/artist/4Ww5mwS7BWYjoZTUIrMHfC?utm_source=generator"
+
+Cannonball Adderley :
+src="https://open.spotify.com/embed/artist/5v74mT11KGJqadf9sLw4dA?utm_source=generator"
+
+Sonny Rollins :
+https://open.spotify.com/embed/artist/1VEzN9lxvG6KPR3QQGsebR?utm_source=generator
+
+Sidney Bechet : 
+src="https://open.spotify.com/embed/artist/1RsmXc1ZqW3WBs9iwxiSwk?utm_source=generator" 
+width="100%" height="380" frameBorder="0" allowfullscreen="" 
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">

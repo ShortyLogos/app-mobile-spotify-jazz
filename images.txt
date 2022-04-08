@@ -1,0 +1,10 @@
+ImagesApi
+ - getImage(ImageUri imageUri)
+ 
+ On va faire une méthode qui va attendre que l'image soit loadée pour l'afficher
+ 
+ 
+ data.track.imageUri --> aller chercher l'image d'une chanson
+ 
+ 
+ mSpotifyAppRemote.getImagesApi().getImage(data.track.imageUri).setResultCallback(new CallbackImage());
