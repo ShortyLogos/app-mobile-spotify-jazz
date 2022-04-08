@@ -20,12 +20,12 @@
             android:layout_height="60dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:background="@drawable/jazz_button"
             android:fontFamily="@font/oranienbaum"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:text="À propos du jazz"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
@@ -34,15 +34,15 @@
             android:id="@+id/btnChoisirArtiste"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="28dp"
             android:layout_weight="1"
             android:background="@drawable/jazz_button"
             android:fontFamily="@font/oranienbaum"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
             android:text="Choisir Artiste"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
@@ -62,26 +62,13 @@
             android:text="Night"
             android:textAllCaps="true"
             android:textColor="@color/spicy_mustard"
-            android:textSize="72sp"
+            android:textSize="64sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.646"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/copyright"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/oranienbaum"
-            android:text="Déric Marchand © 2022"
-            android:textColor="@color/med_brown"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.702"
+            app:layout_constraintHorizontal_bias="0.642"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.768" />
+            app:layout_constraintVertical_bias="0.709" />
 
         <TextView
             android:id="@+id/jazz"
@@ -91,13 +78,13 @@
             android:text="Jazz"
             android:textAllCaps="true"
             android:textColor="#FFFFFF"
-            android:textSize="72sp"
+            android:textSize="64sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.338"
+            app:layout_constraintHorizontal_bias="0.334"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.068" />
+            app:layout_constraintVertical_bias="0.272" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -110,7 +97,6 @@
         android:id="@+id/nomAlbum"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
         android:layout_weight="0.4"
         android:ems="10"
         android:fontFamily="@font/oranienbaum"
