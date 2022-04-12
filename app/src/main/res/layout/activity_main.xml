@@ -65,10 +65,10 @@
             android:textSize="64sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.642"
+            app:layout_constraintHorizontal_bias="0.646"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.709" />
+            app:layout_constraintVertical_bias="0.492" />
 
         <TextView
             android:id="@+id/jazz"
@@ -81,10 +81,10 @@
             android:textSize="64sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.334"
+            app:layout_constraintHorizontal_bias="0.336"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.272" />
+            app:layout_constraintVertical_bias="0.061" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -102,10 +102,11 @@
         android:fontFamily="@font/oranienbaum"
         android:gravity="center"
         android:inputType="textPersonName"
+        android:lines="2"
         android:singleLine="false"
         android:text="Name"
         android:textColor="@color/spicy_mustard"
-        android:textSize="16sp"
+        android:textSize="20sp"
         tools:text="Album" />
 
     <LinearLayout
@@ -121,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.6"
-            android:gravity="center_vertical"
+            android:gravity="center|center_horizontal|center_vertical"
             android:orientation="horizontal"
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
@@ -178,7 +179,7 @@
                     android:text="TextView"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     tools:text="Chanson" />
             </LinearLayout>
 

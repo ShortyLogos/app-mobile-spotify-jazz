@@ -1,9 +1,11 @@
 package com.dm.spotifyjazznight;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button btnChoisirArtiste;
     ImageView btnPlay;
     ImageView btnNext;
     ImageView couvertureAlbum;
@@ -44,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
         titreChanson = findViewById(R.id.titreChanson);
         nomArtiste = findViewById(R.id.nomArtiste);
         nomAlbum = findViewById(R.id.nomAlbum);
+
+        btnChoisirArtiste = findViewById(R.id.btnChoisirArtiste);
+
+        btnChoisirArtiste.setOnClickListener(v -> {
+            Intent choixArtiste = new Intent(this, ArtisteActivity.class);
+            startActivity(choixArtiste);
+        });
 
         btnPlay.setOnClickListener(v -> {
             jouer();
