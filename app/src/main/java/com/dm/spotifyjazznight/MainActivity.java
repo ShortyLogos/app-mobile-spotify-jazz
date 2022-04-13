@@ -2,6 +2,7 @@ package com.dm.spotifyjazznight;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -25,12 +26,10 @@ import com.spotify.protocol.types.Track;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-// METTRE NOTRE PlayerApi dans une variable
-// On va devoir partir un thread pour un SeekBar
-
 public class MainActivity extends AppCompatActivity {
 
     Button btnChoisirArtiste;
+    Button btnUniversJazz;
     ImageView btnPlay;
     ImageView btnNext;
     ImageView couvertureAlbum;
@@ -54,9 +53,15 @@ public class MainActivity extends AppCompatActivity {
         nomAlbum = findViewById(R.id.nomAlbum);
 
         btnChoisirArtiste = findViewById(R.id.btnChoisirArtiste);
+        btnUniversJazz = findViewById(R.id.btnUniversJazz);
 
         btnChoisirArtiste.setOnClickListener(v -> {
             lanceur.launch(new Intent(this, ArtisteActivity.class));
+        });
+
+        btnUniversJazz.setOnClickListener(v -> {
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://fr.wikipedia.org/wiki/Jazz"));
+            startActivity(i);
         });
 
         btnPlay.setOnClickListener(v -> {
@@ -110,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                 String artisteURI = result.getData().getStringExtra("artisteURI");
                 spotifyDiffuseur.setlectureArtisteURI(artisteURI);
                 btnPlay.setBackgroundResource(R.drawable.pause_button);
-                Log.d("MainActivity", "J'EXISTE " + artisteURI);
             }
         }
     }

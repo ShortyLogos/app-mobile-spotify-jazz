@@ -34,7 +34,7 @@ public class SpotifyDiffuseur {
     }
 
     public void seConnecter() {
-        // On fera notre connection ici
+        // On fait notre connection ici
         ConnectionParams connectionParams =
                 new ConnectionParams.Builder(CLIENT_ID)
                         .setRedirectUri(REDIRECT_URI)
@@ -46,17 +46,16 @@ public class SpotifyDiffuseur {
 
                     public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                         mSpotifyAppRemote = spotifyAppRemote;   // Objet de base de l'API
-                        Log.d("MainActivity", "Connected! Yay!");
+                        Log.d("MainActivity", "Connecté!");
 
                         lecteur = mSpotifyAppRemote.getPlayerApi();
-                        // Now you can start interacting with App Remote
                         connecter();
                     }
 
                     public void onFailure(Throwable throwable) {
                         Log.e("MyActivity", throwable.getMessage(), throwable);
                         mSpotifyAppRemote = null;
-                        // Something went wrong when attempting to connect! Handle errors here
+                        // Quelque chose a cloché!
                     }
                 });
     }
@@ -88,12 +87,10 @@ public class SpotifyDiffuseur {
     }
 
     public void prochaineChanson() {
-        if (!lecture) { lecture = true; }
+        if (!lecture) {
+            lecture = true;
+        }
         lecteur.skipNext();
-    }
-
-    public String getlectureArtisteURI() {
-        return lectureArtisteURI;
     }
 
     public void setlectureArtisteURI(String lectureArtisteURI) {
@@ -117,7 +114,6 @@ public class SpotifyDiffuseur {
                 });
 
                 ((MainActivity)contexte).rafraichirAffichage(track, couverture);
-                Log.d("MainActivity", track.name + " by " + track.artist.name);
             }
         }
     }
