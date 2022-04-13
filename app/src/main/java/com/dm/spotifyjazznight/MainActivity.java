@@ -3,6 +3,11 @@ package com.dm.spotifyjazznight;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
@@ -21,7 +26,6 @@ import com.spotify.protocol.types.Track;
 import java.util.concurrent.atomic.AtomicReference;
 
 // METTRE NOTRE PlayerApi dans une variable
-
 // On va devoir partir un thread pour un SeekBar
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     TextView titreChanson;
     TextView nomArtiste;
     TextView nomAlbum;
+    ActivityResultLauncher<Intent> lanceur;
 
     private SpotifyDiffuseur spotifyDiffuseur;
 
@@ -51,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btnChoisirArtiste = findViewById(R.id.btnChoisirArtiste);
 
         btnChoisirArtiste.setOnClickListener(v -> {
-            Intent choixArtiste = new Intent(this, ArtisteActivity.class);
-            startActivity(choixArtiste);
+            lanceur.launch(new Intent(this, ArtisteActivity.class));
         });
 
         btnPlay.setOnClickListener(v -> {
@@ -63,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
             spotifyDiffuseur.prochaineChanson();
         });
 
-        btnNext.setOnLongClickListener(v -> {
-            spotifyDiffuseur.avanceRapide();
-            return true;
-        });
+        lanceur = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new CallBackChoixArtiste()
+        );
     }
 
     @Override
@@ -98,21 +102,17 @@ public class MainActivity extends AppCompatActivity {
         couvertureAlbum.setImageBitmap(couverture);
     }
 
-//    private void connected() {
-//        // Play a playlist
-//        mSpotifyAppRemote.getPlayerApi().play("spotify:artist:4iRZAbYvBqnxrbs6K25aJ7");   // .getPlayerApi() retourn un objet PlayerApi
-//
-////         Subscribe to PlayerState : une classe également
-////         Appelé à chaque fois qu'on pèse sur player, stop, next --> quand le state est changé
-//        mSpotifyAppRemote.getPlayerApi()
-//                .subscribeToPlayerState()   // PlayerState : la toune qui est en train de jouer
-//                .setEventCallback(playerState -> {  // Un callback qui indiquera si l'état de playerState a changé
-//                    final Track track = playerState.track; // Objet Track qui existe (voir l'API pour tous les objets) -> album, artist, etc...
-//                    if (track != null) {
-//                        // On va changer des affichages de champs textes et d'images dans le TP
-//                        Log.d("MainActivity", track.name + " by " + track.artist.name);
-//                    }
-//                });
-//    }
+    private class CallBackChoixArtiste implements ActivityResultCallback<ActivityResult> {
+
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == 17) {
+                String artisteURI = result.getData().getStringExtra("artisteURI");
+                spotifyDiffuseur.setlectureArtisteURI(artisteURI);
+                btnPlay.setBackgroundResource(R.drawable.pause_button);
+                Log.d("MainActivity", "J'EXISTE " + artisteURI);
+            }
+        }
+    }
 }
 

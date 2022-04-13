@@ -104,7 +104,6 @@
         android:inputType="textPersonName"
         android:lines="2"
         android:singleLine="false"
-        android:text="Name"
         android:textColor="@color/spicy_mustard"
         android:textSize="20sp"
         tools:text="Album" />
@@ -160,7 +159,6 @@
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
                     android:shadowColor="#D63F3F"
-                    android:text="TextView"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -176,7 +174,6 @@
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
                     android:shadowColor="#D63F3F"
-                    android:text="TextView"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -201,27 +198,10 @@
                 android:paddingTop="2dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="2dp"
-                android:text="TextView"
                 android:textColor="@color/spicy_mustard"
                 android:textSize="16sp"
                 tools:text="1:03" />
 
-            <TextView
-                android:id="@+id/dureeMaxChanson"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/oranienbaum"
-                android:gravity="right"
-                android:paddingStart="12dp"
-                android:paddingTop="2dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="2dp"
-                android:text="TextView"
-                android:textColor="@color/spicy_mustard"
-                android:textSize="16sp"
-                tools:text="4:27" />
         </LinearLayout>
 
         <SeekBar

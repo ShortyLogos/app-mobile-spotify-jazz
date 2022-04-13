@@ -25,7 +25,7 @@ public class SpotifyDiffuseur {
     private PlayerApi lecteur;
     private PlayerState etatLecteur;
     private Context contexte;
-    private String lectureURI;
+    private String lectureArtisteURI;
     private boolean lecture = false;
     Bitmap couverture = null;
 
@@ -66,22 +66,8 @@ public class SpotifyDiffuseur {
     }
 
     private void connecter() {
-        // Play a playlist
-        lecteur.play("spotify:artist:4iRZAbYvBqnxrbs6K25aJ7");   // .getPlayerApi() retourn un objet PlayerApi
+        lecteur.play(lectureArtisteURI);
         lecture = true;
-
-//        Subscribe to PlayerState : une classe également
-//        Appelé à chaque fois qu'on pèse sur player, stop, next --> quand le state est changé
-        lecteur
-                .subscribeToPlayerState()   // PlayerState : la toune qui est en train de jouer
-                .setEventCallback(playerState -> {  // Un callback qui indiquera si l'état de playerState a changé
-                    final Track track = playerState.track; // Objet Track qui existe (voir l'API pour tous les objets) -> album, artist, etc...
-                    if (track != null) {
-                        // On va changer des affichages de champs textes et d'images dans le TP
-                        Log.d("MainActivity", track.name + " by " + track.artist.name);
-                    }
-                });
-
 
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()   // PlayerState : la toune qui est en train de jouer
@@ -93,9 +79,6 @@ public class SpotifyDiffuseur {
     }
 
     public void jouer() {
-        lecteur.pause();
-        CallResult etatLecteur = lecteur.getPlayerState();
-
         if (lecture) {
             lecteur.pause();
         }
@@ -109,19 +92,12 @@ public class SpotifyDiffuseur {
         lecteur.skipNext();
     }
 
-    public void avanceRapide() {
-        if (lecture) {
-            lecteur.seekToRelativePosition(+15000);
-        }
-        Log.d("MainActivity", "Je rentre ici!");
+    public String getlectureArtisteURI() {
+        return lectureArtisteURI;
     }
 
-    public String getLectureURI() {
-        return lectureURI;
-    }
-
-    public void setLectureURI(String lectureURI) {
-        this.lectureURI = lectureURI;
+    public void setlectureArtisteURI(String lectureArtisteURI) {
+        this.lectureArtisteURI = lectureArtisteURI;
     }
 
     public boolean isLecture() {
