@@ -104,6 +104,7 @@
         android:inputType="textPersonName"
         android:lines="2"
         android:singleLine="false"
+        android:text="Sélectionner un artiste"
         android:textColor="@color/spicy_mustard"
         android:textSize="20sp"
         tools:text="Album" />
