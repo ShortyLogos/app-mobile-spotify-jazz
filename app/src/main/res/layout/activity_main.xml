@@ -194,18 +194,19 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/oranienbaum"
+                android:gravity="right"
                 android:paddingStart="12dp"
                 android:paddingTop="2dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="2dp"
                 android:textColor="@color/spicy_mustard"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 tools:text="1:03" />
 
         </LinearLayout>
 
         <SeekBar
-            android:id="@+id/seekBar2"
+            android:id="@+id/seekBarDuree"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"

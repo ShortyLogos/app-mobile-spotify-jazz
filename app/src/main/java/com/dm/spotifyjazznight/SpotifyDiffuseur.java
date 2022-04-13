@@ -26,6 +26,8 @@ public class SpotifyDiffuseur {
     private PlayerState etatLecteur;
     private Context contexte;
     private String lectureArtisteURI;
+    private String nomChanson;
+    private long dureeChanson;
     private boolean lecture = false;
     Bitmap couverture = null;
 
@@ -65,8 +67,10 @@ public class SpotifyDiffuseur {
     }
 
     private void connecter() {
-        lecteur.play(lectureArtisteURI);
-        lecture = true;
+        if (lectureArtisteURI != null) {
+            lecteur.play(lectureArtisteURI);
+            lecture = true;
+        }
 
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()   // PlayerState : la toune qui est en train de jouer
@@ -78,18 +82,14 @@ public class SpotifyDiffuseur {
     }
 
     public void jouer() {
-        if (lecture) {
-            lecteur.pause();
-        }
+        if (lecture) { lecteur.pause(); }
         else { lecteur.resume(); }
 
         lecture = !lecture;
     }
 
     public void prochaineChanson() {
-        if (!lecture) {
-            lecture = true;
-        }
+        if (!lecture) { lecture = true; }
         lecteur.skipNext();
     }
 
@@ -97,8 +97,21 @@ public class SpotifyDiffuseur {
         this.lectureArtisteURI = lectureArtisteURI;
     }
 
+    public PlayerApi getLecteur() {
+        return lecteur;
+    }
+
     public boolean isLecture() {
         return lecture;
+    }
+
+    public String getNomChanson() {
+        return nomChanson;
+    }
+
+    public int getDureeChanson() {
+        // track.duration en millisecondes
+        return (int)dureeChanson * 1000;
     }
 
     private class CallbackChangementChanson implements Subscription.EventCallback<PlayerState> {
@@ -107,6 +120,9 @@ public class SpotifyDiffuseur {
         public void onEvent(PlayerState data) {
             final Track track = data.track;
             if (track != null) {
+                dureeChanson = track.duration;
+                nomChanson = track.name;
+
                 // Lors du changement de l'état de lecteur, comme lors d'un changement de chanson,
                 // on rafraîchit l'affichage des informations pertinentes : titre, artiste, album, image de l'album...
                 mSpotifyAppRemote.getImagesApi().getImage(track.imageUri, SMALL).setResultCallback(bitmap -> {
