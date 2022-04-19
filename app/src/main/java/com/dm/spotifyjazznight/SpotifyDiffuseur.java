@@ -93,6 +93,11 @@ public class SpotifyDiffuseur {
         lecteur.skipNext();
     }
 
+    public void precedenteChanson() {
+        if (!lecture) { lecture = true; }
+        lecteur.skipPrevious();
+    }
+
     public void setlectureArtisteURI(String lectureArtisteURI) {
         this.lectureArtisteURI = lectureArtisteURI;
     }

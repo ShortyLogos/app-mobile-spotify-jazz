@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
             lanceur.launch(new Intent(this, ArtisteActivity.class));
         });
 
+        // Redirection URL - Pour en apprendre davantage sur l'histoire du jazz
         btnUniversJazz.setOnClickListener(v -> {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://fr.wikipedia.org/wiki/Jazz"));
             startActivity(i);
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Gestion de la prochaine chanson avec le lecteur + le thread du SeekBar
+        // À noter : un délai est parfois notable entre le service Spotify qui change de chanson et l'affichage de l'Activité
+        // car l'application est à la mercie des fois où l'application décide de passer dans le onEventChange du playerState.
         btnNext.setOnClickListener(v -> {
             if (spotifyDiffuseur.getLecteur() != null) {
                 spotifyDiffuseur.prochaineChanson();
@@ -106,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         );
 
         seekBarDuree.setMin(1);
-        seekBarDuree.setMax(255);
         chansonCourante = spotifyDiffuseur.getNomChanson();
         Log.d("Jazz", "" + chansonCourante);
     }
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         chansonCourante = spotifyDiffuseur.getNomChanson();
         if (spotifyDiffuseur.isLecture()) {
             handlerDuree.post(threadDuree);
-            btnPlay.setBackgroundResource(R.drawable.pause_button);
+            btnPlay.setBackgroundResource(R.drawable.pause_button); // Le bouton dessiné dans un fichier .XML change selon l'état du lecteur
         }
         else {
             btnPlay.setBackgroundResource(R.drawable.play_button);
@@ -136,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // La vue doit épouser ce qui se déroule dans le modèle au niveau de la lecture
     public void rafraichirAffichage(Track chanson, Bitmap couverture) {
         titreChanson.setText(chanson.name.toString());
         nomAlbum.setText(chanson.album.name.toString());
@@ -143,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
         couvertureAlbum.setImageBitmap(couverture);
     }
 
+    // On essaie autant que possible de coller le décompte du SeekBar à l'avancement réel de la chanson.
+    // Parfois délicat en raison de la communication avec le service Spotify.
     public void reinitialiserDuree() {
         secondes = 0;
         minutes = 0;
@@ -151,11 +157,13 @@ public class MainActivity extends AppCompatActivity {
         seekBarDuree.setProgress(spotifyDiffuseur.getDureeChanson());
     }
 
+    // Le boomerang qui permet d'enlencher la lecture d'un artiste spécifié par l'utilisateur
     private class CallBackChoixArtiste implements ActivityResultCallback<ActivityResult> {
 
         @Override
         public void onActivityResult(ActivityResult result) {
             if (result.getResultCode() == 17) {
+                chansonCourante = spotifyDiffuseur.getNomChanson();
                 handlerDuree.removeCallbacks(threadDuree);
                 String artisteURI = result.getData().getStringExtra("artisteURI");
                 spotifyDiffuseur.setlectureArtisteURI(artisteURI);
@@ -166,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Classe interne pour gérer le thread supplémentaire du Seekbar
     private class DureeChanson extends Thread {
 
         @Override
@@ -178,8 +187,9 @@ public class MainActivity extends AppCompatActivity {
 
             dureeFormattee = String.format("%02d", minutes) + ":" + String.format("%02d", secondes);
             dureeChanson.setText(dureeFormattee);
+            seekBarDuree.setMax(spotifyDiffuseur.getDureeChanson()); // On s'assure d'accorder au SeekBar un Max cohérent avec la durée de la chanson
             seekBarDuree.setProgress((minutes * 60) + secondes);
-            handlerDuree.postDelayed(threadDuree, 1000); // démarre le thread après le délai
+            handlerDuree.postDelayed(threadDuree, 1000); // Démarre le thread après le délai
         }
     }
 }
